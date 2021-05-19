@@ -1,11 +1,11 @@
 {
   "type": "object",
   "properties": {
-    "date": {
+    "holiday_day": {
       "type": ["null", "string"],
       "format": "date-time"
     },
-    "name": {
+    "holiday_name": {
       "type": ["null", "string"]
     }
   }
