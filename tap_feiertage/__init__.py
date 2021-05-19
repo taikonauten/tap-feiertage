@@ -30,8 +30,8 @@ def load_and_write_schema(name, key_properties="id", bookmark_property="updated_
     singer.write_schema(name, schema, key_properties, bookmark_properties=[bookmark_property])
     return schema
 
-def get_url(endpoint):
-    return BASE_API_URL + endpoint
+def get_url():
+    return BASE_API_URL
 
 
 @backoff.on_exception(
@@ -73,7 +73,7 @@ def sync_endpoint(schema_name, year):
 
     with Transformer() as transformer:
 
-        url = get_url(schema_name)
+        url = get_url()
 
         response = request(url, year)
 
@@ -81,7 +81,11 @@ def sync_endpoint(schema_name, year):
 
         for row in response:
 
+            LOGGER.info(row)
+
             for holiday in row:
+
+                LOGGER.info(holiday)
 
                 if holiday["regions"]["be"] == True:
 
