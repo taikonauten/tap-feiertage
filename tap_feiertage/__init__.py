@@ -83,7 +83,7 @@ def sync_endpoint(schema_name, year):
 
             if row["holiday"]["regions"]["be"] == True:
 
-                aligned_row = {"date": row["holiday"]["date"], "name": row["holiday"]["name"]}
+                aligned_row = {"holiday_day": row["holiday"]["date"], "holiday_name": row["holiday"]["name"]}
 
                 item = transformer.transform(aligned_row, schema)
 
