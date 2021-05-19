@@ -43,7 +43,7 @@ def get_url(endpoint):
 @utils.ratelimit(100, 15)
 def request(url, year):
     headers = {"X-DFA-Token": "dfa"}
-    req = requests.Request("POST", url=url+year, headers=headers).prepare()
+    req = requests.Request("POST", url=url+str(year), headers=headers).prepare()
     LOGGER.info("POST {}".format(req.url))
     resp = SESSION.send(req)
     resp.raise_for_status()
