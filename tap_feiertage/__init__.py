@@ -98,9 +98,7 @@ def do_sync():
     LOGGER.info("Starting sync")
 
     today = datetime.now()
-    years = range(2009,today.year)
-
-    LOGGER.info(today + ' ' + today.year)
+    years = range(2009,today.year + 1)
 
     for year in years:
         sync_endpoint("holidays", year)
