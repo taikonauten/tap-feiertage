@@ -79,17 +79,19 @@ def sync_endpoint(schema_name, year):
 
         time_extracted = utils.now()
 
-        for row in response["holidays"]:
+        for row in response:
 
-            if row["regions"]["be"] == True:
+            for holiday in row:
 
-                aligned_row = {"date": row["date"], "name": row["name"]}
+                if holiday["regions"]["be"] == True:
 
-                item = transformer.transform(aligned_row, schema)
+                    aligned_row = {"date": holiday["date"], "name": holiday["name"]}
 
-                singer.write_record(schema_name,
-                                    item,
-                                    time_extracted=time_extracted)
+                    item = transformer.transform(aligned_row, schema)
+
+                    singer.write_record(schema_name,
+                                        item,
+                                        time_extracted=time_extracted)
 
     singer.write_state(STATE)
 
