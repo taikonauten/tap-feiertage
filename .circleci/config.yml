@@ -8,15 +8,15 @@ jobs:
       - run:
           name: 'Setup'
           command: |
-            virtualenv -p python3 ~/.virtualenvs/tap-timebutler
-            source ~/.virtualenvs/tap-timebutler/bin/activate
+            virtualenv -p python3 ~/.virtualenvs/tap-feiertage
+            source ~/.virtualenvs/tap-feiertage/bin/activate
             pip install .
             pip install pylint
       - run:
           name: 'Pylint'
           command: |
-            source ~/.virtualenvs/tap-timebutler/bin/activate
-            pylint tap_timebutler --disable missing-docstring,logging-format-interpolation,no-member,broad-except,redefined-variable-type,too-many-branches,too-few-public-methods,wrong-import-order,too-many-locals
+            source ~/.virtualenvs/tap-feiertage/bin/activate
+            pylint tap_feiertage --disable missing-docstring,logging-format-interpolation,no-member,broad-except,redefined-variable-type,too-many-branches,too-few-public-methods,wrong-import-order,too-many-locals
       - add_ssh_keys
       - run:
           name: 'Integration Tests'
@@ -24,7 +24,7 @@ jobs:
             aws s3 cp s3://com-stitchdata-dev-deployment-assets/environments/tap-tester/sandbox dev_env.sh
             source dev_env.sh
             source /usr/local/share/virtualenvs/tap-tester/bin/activate
-            run-test --tap=tap-timebutler \
+            run-test --tap=tap-feiertage \
                        --target=target-stitch \
                        --orchestrator=stitch-orchestrator \
                        --email=harrison+sandboxtest@stitchdata.com \
@@ -44,7 +44,7 @@ workflows:
           filters:
             branches:
               only:
-                - update/timebutler-circle-config
+                - update/feiertage-circle-config
                 #- master
     jobs:
       - build

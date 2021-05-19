@@ -1,2 +1,2 @@
 include LICENSE
-include tap_timebutler/schemas/*.json
+include tap_feiertage/schemas/*.json
